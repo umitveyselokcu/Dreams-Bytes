@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DreamsBytes.Core.Entites.OrderItem>
+
+
+
+
+
+    <div class="modal order-detail" id="@ViewData["modalid"]"  >
+
+        <h1> Ürünler </h1>
+            
+
+        <table class="table-bordered table">
+
+
+            <thead>
+                <tr>
+                    <th scope="col">
+                        Ürün Adı
+                    </th>
+                    <th scope="col">
+                        Miktar
+                    </th>
+                    <th scope="col">
+                        Birim fiyatı
+                    </th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td scope="row">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitPrice) TL
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+            
+
+        </table>
+
+        <div class="float-right font-weight-bold" >
+            <b>Toplam : </b>
+            <span>@ViewData["toplam"] TL</span>
+        </div>
+    </div>

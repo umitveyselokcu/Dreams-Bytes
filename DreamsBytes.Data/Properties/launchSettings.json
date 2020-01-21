@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "DreamsBytes.Data": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ShouldRefreshDb": "false",
+        "Conn": "Data Source=DESKTOP-J47QFKQ\\\\SQLEXPRESS;Initial Catalog=DreamsBytes;Integrated Security=True"
+      }
+    }
+  }
+}

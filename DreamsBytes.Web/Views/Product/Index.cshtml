@@ -1,0 +1,169 @@
+﻿@model IEnumerable<DreamsBytes.Core.Entites.Product>
+
+@{
+    ViewData["Title"] = "Ürünler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var index = 1;
+}
+
+
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Ürün Ekle</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th>
+                Ürün Adı
+            </th>
+            <th>
+                Türü
+            </th>
+            <th>
+                Fiyatı
+            </th>
+            <th>
+                Stok
+            </th>
+            <th>
+                
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            var indexAttDel = "eax" + @item.Id + "del";
+            var indexAtt = "eax" + @item.Id;
+            <tr>
+                <th scope="row">@index</th>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.ProductType.Name
+                </td>
+                <td>
+                    @item.Price TL
+                </td>
+                <td>
+                    @item.Quantity
+                </td>
+                <td>
+                    @item.CreatedOnUtc
+                </td>
+                <td>
+
+                    <a class="btn btn-outline-success" data-Index="@item.Id" href="#@indexAtt" rel="modal:open">Sepete Ekle</a>
+                    <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                    <a class="btn btn-outline-danger" id="a @indexAttDel" href="#@indexAttDel" rel="modal:open">Sil</a>
+                </td>
+            </tr>
+            index++;
+        }
+    </tbody>
+</table>
+
+@foreach (var item in Model)
+{
+    var indexAttDel = "eax" + @item.Id + "del";
+
+    <div class="deleteItem modal" id="@indexAttDel" >
+
+
+
+
+        <h3>Ürünü silmek istediğinizden emin misiniz?</h3>
+        <div>
+
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Adı:
+                </dt>
+                <dd class="col-sm-10">
+                    @item.Name
+
+                </dd>
+                <dt class="col-sm-2">
+                    Miktarı:
+                </dt>
+                <dd class="col-sm-10">
+
+                    @item.Quantity
+                </dd>
+                <dt class="col-sm-2">
+                    Fiyatı:
+                </dt>
+                <dd class="col-sm-10">
+                    @item.Price
+
+                </dd>
+                <dt class="col-sm-2">
+                    Türü:
+                </dt>
+                <dd class="col-sm-10">
+                    @item.ProductType.Name
+
+                </dd>
+
+            </dl>
+
+            <form id="@item.Name" asp-action="Delete">
+                <input id="@item.Name 1" type="hidden" name="productId" value=@item.Id />
+                <input id="@item.Name 2" type="submit" value="Sil" class="btn btn-danger" />
+            </form>
+        </div>
+
+    </div>
+
+}
+
+
+
+
+@foreach (var item in Model)
+{
+    var indexAtt = "eax" + @item.Id;
+    <div class="addToCartItem modal"style="width: 400px;height: 300px;" id="@indexAtt" >
+        <div>
+            <h3>Ürün sepete eklendi.</h3>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Adı:
+                </dt>
+                <dd class="col-sm-10">
+                    @item.Name
+
+                </dd>
+                <dt class="col-sm-2">
+                    Miktarı:
+                </dt>
+                <dd class="col-sm-10">
+
+                    @item.Quantity
+                </dd>
+                <dt class="col-sm-2">
+                    Fiyatı:
+                </dt>
+                <dd class="col-sm-10">
+                    @item.Price
+
+                </dd>
+                <dt class="col-sm-2">
+                    Türü:
+                </dt>
+                <dd class="col-sm-10">
+                    @item.ProductType.Name
+
+                </dd>
+            </dl>
+
+        </div>
+    </div>
+}

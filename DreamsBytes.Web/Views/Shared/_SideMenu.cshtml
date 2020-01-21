@@ -1,0 +1,16 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <div id="mySidenav" class="sidenav">
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            <ul class="navbar-nav flex-grow-1">
+                <li>
+                    <a asp-area="" asp-controller="Product" asp-action="Index">Ürün listesi</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Product" asp-action="Orders">Siparişlerim</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+}

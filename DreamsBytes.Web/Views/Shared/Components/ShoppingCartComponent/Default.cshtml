@@ -1,0 +1,66 @@
+﻿@model IList<ShoppingCartItemViewModel>
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div id="myCart" class="cart">     
+        @if (Model.Any())
+        {
+            int index = 1;
+           
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Ürün</th>
+                        <th scope="col">Miktarı</th>
+                        <th scope="col">Fiyatı</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <th scope="row">@index</th>
+                            <td>@item.Product.Name </td>
+                            <td>@item.Quantity </td>
+                            <td>@item.Product.Price </td>
+                            <td><span class="btn btn-outline-danger" href="#" data-cartitemid="@item.Id" data-productid="@item.ProductId" data-userid="@item.UserId">Sil</span></td>
+                        </tr>
+                        index++;
+                    }
+
+                </tbody>
+            </table>
+            <div class="row total-text">
+
+                <form  asp-action="ConfirmOrder">
+                    
+                    <input  type="submit" class="col-8 btn btn-outline-success float-left cart-buy-btn" value="Satın Al" /> 
+                 
+                </form>
+
+
+
+
+            
+                <span class="col-4">
+                    Toplam: @ViewBag.Total
+                </span>
+            </div>
+
+
+
+        }
+        else
+        {
+            <h2>Sepetinizde ürün yok.</h2>
+        }
+
+
+    </div>
+}
+
+

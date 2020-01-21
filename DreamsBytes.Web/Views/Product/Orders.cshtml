@@ -1,0 +1,45 @@
+﻿@model IList<DreamsBytes.Core.Entites.Order>
+
+@{
+    ViewData["Title"] = "Siparişler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int index = 1;
+}
+<h3>Siparişlerim</h3>
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Sipariş No</th>
+                <th scope="col">Toplam Tutar</th>
+                <th scope="col">Sipariş Tarihi</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var modalId = "modal" + index;
+                <tr>
+                    <th scope="row">@index</th>
+                    <td>@item.Id </td>
+                    <td>@item.OrderTotal</td>
+                    <td>@item.CreatedOnUtc </td>
+                    <td><a class="btn btn-outline-info" data-orderdetail=@index href="#@modalId" rel="modal:open">Ürünler</a></td>
+                </tr>
+                index++;
+            }
+        </tbody>
+    </table>
+
+    index = 1;
+    foreach (var item in Model)
+    {
+        var modalId = "modal" + index;
+        @await Html.PartialAsync("/Views/Shared/_OrderDetail.cshtml", item.OrderItems, new ViewDataDictionary(this.ViewData) { { "modalid", modalId }, { "toplam", item.OrderTotal } })
+        index++;
+    }
+      
+}

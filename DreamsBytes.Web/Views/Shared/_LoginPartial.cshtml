@@ -1,0 +1,27 @@
+﻿
+<ul class="navbar-nav">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="nav-item">
+            <a class="nav-link " title="Manage">Role: <b> @User.Claims.Where(x => x.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").First().Value</b> || Kullanıcı: <b>@User.Identity.Name</b></a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-controller="Login" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link ">Çıkış Yap</button>
+            </form>
+        </li>
+        <li>
+           
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link " asp-controller="Login" asp-action="UserLogin">Üye Ol </a> @* coming soon *@
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " asp-controller="Login" asp-action="UserLogin">Giriş Yap</a>
+        </li>
+
+    }
+</ul>
